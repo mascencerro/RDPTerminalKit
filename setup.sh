@@ -30,8 +30,8 @@ get_repository() {
 unpack_files() {
     # Copy repository to correct locations
     echo "Copying files"
-    cp -adr lab_client/server_fs/srv /
-    cp -adr lab_client/server_fs/etc /
+    cp -adr RDPTerminalKit/server_fs/srv /
+    cp -adr RDPTerminalKit/server_fs/etc /
 
     chmod +x /srv/client_fs_pack.sh
     chmod +x /srv/local_repository_fill.sh
