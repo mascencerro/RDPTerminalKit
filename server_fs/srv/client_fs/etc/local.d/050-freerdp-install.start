@@ -1,0 +1,11 @@
+#!/bin/sh
+#### Startup script to perform any additional tasks before system is handed over to user
+
+# Install custom FreeRDP package
+apk update --allow-untrusted
+apk add freerdp-usbmod-libs --allow-untrusted
+apk add freerdp-usbmod --allow-untrusted
+
+# Make xfreerdp binary suid for USB access because udev rules just aren't working
+chmod 4755 /usr/bin/xfreerdp
+

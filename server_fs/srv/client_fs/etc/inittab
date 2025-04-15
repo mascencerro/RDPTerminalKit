@@ -1,0 +1,14 @@
+# /etc/inittab
+
+::sysinit:/sbin/openrc sysinit
+::sysinit:/sbin/openrc boot
+::wait:/sbin/openrc default
+
+# Spawn one getty and login as user 'termuser'
+tty1::respawn:/bin/login -f termuser
+
+# Handle CTRL-ALT-DEL
+::ctrlaltdel:/sbin/reboot
+
+# Stuff to do before rebooting
+::shutdown:/sbin/openrc shutdown

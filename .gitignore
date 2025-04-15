@@ -1,0 +1,4 @@
+.venv
+.vscode
+server_fs/srv/www/alpine/v3.21/community
+server_fs/srv/www/alpine/v3.21/main

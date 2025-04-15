@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Last call script to retrieve client 'last_call.sh' from 'next_server'
+# If last_call.sh doesn't exist, next step is login session
+
+SERVER="$(cat /etc/next_server)"
+
+wget -qO - "http://${SERVER}/alpine/client/last_call.sh"
+

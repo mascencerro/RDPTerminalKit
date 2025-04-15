@@ -1,0 +1,9 @@
+#!/bin/sh
+
+while true
+do
+    python3 /usr/local/bin/login.py
+    # xterm -geometry 220x70
+done
+
+

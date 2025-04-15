@@ -1,0 +1,13 @@
+Author: Kevin Miller <kevin.miller@noc.edu>
+Summary: Remove filter from USB_MASS_STORAGE to allow USB mass storage redirection
+----
+--- a/channels/urbdrc/client/libusb/libusb_udevman.c
++++ b/channels/urbdrc/client/libusb/libusb_udevman.c
+@@ -492,7 +492,6 @@
+        {
+                case LIBUSB_CLASS_AUDIO:
+                case LIBUSB_CLASS_HID:
+-               case LIBUSB_CLASS_MASS_STORAGE:
+                case LIBUSB_CLASS_HUB:
+                case LIBUSB_CLASS_SMART_CARD:
+                        return TRUE;

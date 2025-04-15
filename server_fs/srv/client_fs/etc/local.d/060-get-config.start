@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Client script for retrieving modified rdpconfig.ini if it exists on server
+
+SERVER="$(cat /etc/next_server)"
+
+wget "http://${SERVER}/alpine/client/rdpconfig.ini" -O /etc/rdpconfig.ini
+
