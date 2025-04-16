@@ -33,7 +33,7 @@ unpack_files() {
     cp -adr RDPTerminalKit/server_fs/srv /
     cp -adr RDPTerminalKit/server_fs/etc /
 
-    chmod +x /srv/client_fs_pack.sh
+    chmod +x /srv/pack_client_fs.sh
     chmod +x /srv/local_repository_fill.sh
     sleep 10
     chmod +x /srv/ipxe/src/build.sh
@@ -83,7 +83,7 @@ ipxe_setup() {
 }
 
 pack_client_fs() {
-    sh /srv/client_fs_pack.sh
+    sh /srv/pack_client_fs.sh
 }
 
 prepare_local_repository() {
@@ -115,7 +115,7 @@ start_services
 
 
 echo "A base APK overlay is provided."
-echo "If any customizations are needed to client filesystem, after customizations are made /srv/client_fs_pack.sh will need to be rerun as well as calling the bootstrap.sh script from the template creating system."
+echo "If any customizations are needed to client filesystem, after customizations are made /srv/pack_client_fs.sh will need to be rerun as well as calling the bootstrap.sh script from the template creating system."
 echo "Instructions for APK overlay creation with bootstrap.sh can be found in the bootstrap.sh script located in /srv/www/alpine/build."
 echo ""
 echo "Point netboot clients to $(ip -f inet addr show eth0 | grep inet | cut -d ' ' -f6 | cut -d '/' -f1)"

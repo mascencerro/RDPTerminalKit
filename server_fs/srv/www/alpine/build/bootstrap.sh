@@ -2,7 +2,7 @@
 # Creation of custom terminal client
 # ----------------------------------
 # Changes for client filesystem will be in /srv/client_fs
-# To build client template filesystem tarball run /srv/client_fs_pack.sh after changes are made
+# To build client template filesystem tarball run /srv/pack_client_fs.sh after changes are made
 #
 # NOTE: There is also a script 'last_call.sh' that will be requested from the server on client boot
 # Functionality can be added to this script without requiring rebuild of client APK overlay
