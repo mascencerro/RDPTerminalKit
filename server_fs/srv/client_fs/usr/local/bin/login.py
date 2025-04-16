@@ -114,7 +114,7 @@ else:
         client_connect_args.append(f'/v:{terminal_vmhost_ip}')                  # Terminal hostname to connect to
         client_connect_args.append(f'/u:{username}')
         client_connect_args.append(f'/p:{password}')
-        client_connect_args.append(f'/p:{terminal_vmhost_port}')
+        client_connect_args.append(f'/port:{terminal_vmhost_port}')
         
         # Is this a local system or domain login?
         if not ('.\\' in username[0:2]):
