@@ -90,6 +90,12 @@ local_repository() {
 
 }
 
+# Update /etc/next_server with specified server address
+next_server() {
+    echo "${SERVER_ADDR}" > /etc/next_server
+    
+}
+
 # Install GUI interface packages
 gui_install() {
     echo "Setting up X Window system"
@@ -165,6 +171,8 @@ audio_install
 client_fs_install
 
 local_repository
+
+next_server
 
 apkovl_package
 
