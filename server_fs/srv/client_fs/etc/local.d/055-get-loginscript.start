@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Client script for retrieving modified login.py if it exists on server
+
+SERVER="$(cat /etc/next_server)"
+
+wget_status="$(wget -S http://${SERVER}/alpine/client/login.py -O /tmp/login.py 2>&1 | grep 'HTTP/' | awk '{print $2}')"
+
+if [ "${wget_status}" = "200" ]; then
+        mv /tmp/login.py /usr/local/bin
+        chmod 0755 /usr/local/bin/login.py
+fi
