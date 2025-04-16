@@ -84,6 +84,7 @@ prep_tasks() {
 local_repository() {
     if ! [ -z "${LOCAL_REPOSITORY}" ]; then
         echo "Adding local repositories"
+        echo -e "${LOCAL_REPOSITORY}/mod\n$(cat /etc/apk/repositories)" > /etc/apk/repositories
         echo -e "${LOCAL_REPOSITORY}/main\n$(cat /etc/apk/repositories)" > /etc/apk/repositories
         echo -e "${LOCAL_REPOSITORY}/community\n$(cat /etc/apk/repositories)" > /etc/apk/repositories
     fi
