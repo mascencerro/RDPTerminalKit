@@ -53,7 +53,7 @@ else:
     terminal_vmhost = f"{terminal_hostname}V"
 
 if config.has_option('Connection', 'RemotePort'):
-    terminal_vmhost_port = config.get('Connection', 'RemotePort')
+    terminal_vmhost_port = int(config.get('Connection', 'RemotePort'))
 else:
     terminal_vmhost_port = 3389         # Default RDP port
 
@@ -114,6 +114,7 @@ else:
         client_connect_args.append(f'/v:{terminal_vmhost_ip}')                  # Terminal hostname to connect to
         client_connect_args.append(f'/u:{username}')
         client_connect_args.append(f'/p:{password}')
+        client_connect_args.append(f'/p:{terminal_vmhost_port}')
         
         # Is this a local system or domain login?
         if not ('.\\' in username[0:2]):
