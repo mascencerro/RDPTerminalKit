@@ -2,8 +2,11 @@
 
 while true
 do
-    python3 /usr/local/bin/login.py
-    # xterm -geometry 270x40+20-20
+    if [ -f /tmp/alt_xsession.sh ]; then
+        sh /tmp/alt_xsession.sh
+    else
+        python3 /usr/local/bin/login.py
+    fi
 done
 
 
