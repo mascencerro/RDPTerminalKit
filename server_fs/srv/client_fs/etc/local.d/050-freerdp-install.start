@@ -3,8 +3,8 @@
 
 # Install custom FreeRDP package
 apk update --allow-untrusted
-apk add /opt/freerdp-usbmod-libs-2.11.7-r1.apk --allow-untrusted --no-cache
-apk add /opt/freerdp-usbmod-2.11.7-r1.apk --allow-untrusted --no-cache
+apk add /opt/freerdp-usbmod-libs-2.11.7-r1.apk --allow-untrusted --force-non-repository
+apk add /opt/freerdp-usbmod-2.11.7-r1.apk --allow-untrusted --force-non-repository
 
 # Make xfreerdp binary suid for USB access because udev rules just aren't working
 chmod 4755 /usr/bin/xfreerdp
