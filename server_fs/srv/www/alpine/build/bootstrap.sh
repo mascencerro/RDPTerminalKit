@@ -143,6 +143,7 @@ apkovl_package() {
     # Pack up image
     echo "Packing up APK overlay"
     # lbu include /root
+    lbu include /opt
     lbu include /home
     lbu include /usr/local/bin
     lbu include /usr/lib/python3.12
