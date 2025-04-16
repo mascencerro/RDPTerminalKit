@@ -4,9 +4,8 @@
 
 SERVER="$(cat /etc/next_server)"
 
-wget_status="$(wget http://${SERVER}/alpine/client/rdpconfig.ini -O /tmp/rdpconfig.ini 2>&1 | grep 'HTTP/' | awk '{print $2}')"
+wget_status="$(wget -S http://${SERVER}/alpine/client/rdpconfig.ini -O /tmp/rdpconfig.ini 2>&1 | grep 'HTTP/' | awk '{print $2}')"
 
 if [ "${wget_status}" = "200" ]; then
-        rm /etc/rdpconfig.ini
-        mv /etc/rdpconfig.ini /etc
+        mv /tmp/rdpconfig.ini /etc
 fi
