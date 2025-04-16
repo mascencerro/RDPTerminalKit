@@ -4,20 +4,14 @@
 
 if ! [ -z "${domain}" ]; then
     fqdn="${domain}"
-else
-    fqdn="localdomain"
 fi
 
 if ! [ -z "${hostname}" ]; then
     host="${hostname}"
-else
-    host="localhost"
 fi
 
 if ! [ -z "${siaddr}" ]; then
     next_server="${siaddr}"
-else
-    next_server="localhost"
 fi
 
 echo "${host}" > /etc/hostname
@@ -27,9 +21,10 @@ echo "127.0.0.1 ${host}.${fqdn} ${host} localhost.localdomain   localhost" > /et
 echo "::1       localhost   localhost.localdomain" >> /etc/hosts
 
 # Store 'next_server' option from DHCP (boot server) on client filesystem for referencing and add as repository mirrors
-echo "${next_server}" > /etc/next_server
-echo -e "http://${next_server}/alpine/v3.21/main\n$(cat /etc/apk/repositories)" > /etc/apk/repositories
-echo -e "http://${next_server}/alpine/v3.21/community\n$(cat /etc/apk/repositories)" > /etc/apk/repositories
-echo -e "http://${next_server}/alpine/v3.21/mod\n$(cat /etc/apk/repositories)" > /etc/apk/repositories
-
+if ! [ -z "${next_server}" ]; then
+    echo "${next_server}" > /etc/next_server
+    echo -e "http://${next_server}/alpine/v3.21/main\n$(cat /etc/apk/repositories)" > /etc/apk/repositories
+    echo -e "http://${next_server}/alpine/v3.21/community\n$(cat /etc/apk/repositories)" > /etc/apk/repositories
+    echo -e "http://${next_server}/alpine/v3.21/mod\n$(cat /etc/apk/repositories)" > /etc/apk/repositories
+fi
 
