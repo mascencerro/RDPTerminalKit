@@ -135,7 +135,11 @@ else:
             except Exception as e:
                 print(f"Encountered error: {e}")
                 # If user presses CANCEL we break loop and subsequently exit (leaving session between X and God to handle)
-                if not (tkinter.messagebox.askretrycancel(message=f"Could not connect to remote host.\n\nPlease check network connection.\n\n{e}")):
+                connect_fail_message = f"Could not connect to remote host.\n\n"
+                connect_fail_message += f"{terminal_vmhost}.{domain}\n\n"
+                connect_fail_message += f"Please check network connection.\n\n"
+                connect_fail_message += f"{e}"
+                if not (tkinter.messagebox.askretrycancel(message=connect_fail_message)):
                     break
         
         exit()
