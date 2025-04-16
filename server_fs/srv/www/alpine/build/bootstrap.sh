@@ -160,6 +160,13 @@ busybox_httpd() {
     
 }
 
+# Give doas privileges to termuser (for troubleshooting)
+give_privs() {
+    apk add doas
+    echo "permit nopass keepenv :wheel" > /etc/doas.d/doas.conf
+
+}
+
 # LETS GOOOO!
 
 prep_tasks
@@ -175,6 +182,8 @@ client_fs_install
 local_repository
 
 next_server
+
+give_privs
 
 apkovl_package
 
