@@ -10,10 +10,10 @@ tar -czvf "/srv/www/alpine/build/client_fs.tar.gz" -C "/srv/client_fs" .
 gunzip /srv/www/alpine/client/thinclient.apkovl.tar.gz
 
 # etc/next_server
-tar -vf /srv/www/alpine/client/thinclient.apkovl.tar -C /srv/client_fs/ -r etc
+tar -vf /srv/www/alpine/client/thinclient.apkovl.tar -C /srv/client_fs/ -r etc/next_server
 
 # etc/apk/repositories
-tar -vf /srv/www/alpine/client/thinclient.apkovl.tar -C /srv/client_fs/ -r usr
+tar -vf /srv/www/alpine/client/thinclient.apkovl.tar -C /srv/client_fs/ -r etc/apk/repositories
 
 # Compress APK overlay tarball
 gzip /srv/www/alpine/client/thinclient.apkovl.tar
