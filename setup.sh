@@ -14,12 +14,13 @@ fi
 
 echo "Using source: ${repository}"
 
+server_ip="$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')"
+
 # OpenSSH client (not required for server operation)
 # This is needed if 'repository' is set to a local network system user git repository
 openssh_setup() {
     apk add openssh
 }
-
 
 get_repository() {
     apk add git
@@ -82,12 +83,39 @@ ipxe_setup() {
 
 }
 
+set_client_next_server() {
+    echo "${server_ip}" > /srv/client_fs/etc/next_server
+}
+
 pack_client_fs() {
+    # Pack up client_fs tree for custom APK overlay build usage
     sh /srv/pack_client_fs.sh
+
+    # Repackage changes made to client_fs files during server install
+    # Uncompress APK overlay tarball
+    gunzip /srv/www/alpine/client/thinclient.apkovl.tar.gz
+
+    # etc/next_server
+    tar --delete 'etc/next_server' -vf /srv/www/alpine/client/thinclient.apkovl.tar
+    tar -vf /srv/www/alpine/client/thinclient.apkovl.tar -C /srv/client_fs/ -r 'etc/next_server'
+
+    # etc/apk/repositories
+    tar --delete 'etc/apk/repositories' -fv /srv/www/alpine/client/thinclient.apkovl.tar
+    tar -vf /srv/www/alpine/client/thinclient.apkovl.tar -C /srv/client_fs/ -r 'etc/apk/repositories'
+
+    # Compress APK overlay tarball
+    gzip /srv/www/alpline/client/thinclient.apkovl.tar
+
 }
 
 prepare_local_repository() {
     sh /srv/local_repository_fill.sh
+
+    # Update client_fs /etc/apk/repositories and list local repository first
+    echo -e "${server_ip}/mod\n$(cat /srv/client_fs/etc/apk/repositories)" > /srv/client_fs/etc/apk/repositories
+    echo -e "${server_ip}/main\n$(cat /srv/client_fs/etc/apk/repositories)" > /srv/client_fs/etc/apk/repositories
+    echo -e "${server_ip}/community\n$(cat /srv/client_fs/etc/apk/repositories)" > /srv/client_fs/etc/apk/repositories
+
 }
 
 start_services() {
@@ -96,7 +124,7 @@ start_services() {
 
 }
 
-# OpenSSH client (not required for server operation)
+# OpenSSH *client* (not required for server operation)
 # This is needed if 'repository' is set to a local network system user git repository
 openssh_setup
 
@@ -106,9 +134,10 @@ apk_updates
 nginx_setup
 tftp_setup
 ipxe_setup
-
-pack_client_fs
 prepare_local_repository
+
+set_client_next_server
+pack_client_fs
 
 start_services
 
