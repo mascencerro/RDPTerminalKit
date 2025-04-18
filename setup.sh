@@ -84,10 +84,13 @@ ipxe_setup() {
 }
 
 set_client_next_server() {
+    echo "Setting client server address"
     echo "${server_ip}" > /srv/client_fs/etc/next_server
 }
 
 pack_client_fs() {
+    echo "Making some changes to client filesystem and repacking"
+
     # Pack up client_fs tree for custom APK overlay build usage
     sh /srv/pack_client_fs.sh
 
@@ -109,6 +112,8 @@ pack_client_fs() {
 }
 
 prepare_local_repository() {
+    echo "Creating local APK repository mirror"
+
     sh /srv/local_repository_fill.sh
 
     # Update client_fs /etc/apk/repositories and list local repository first
@@ -119,6 +124,7 @@ prepare_local_repository() {
 }
 
 start_services() {
+    echo "Starting services"
     rc-service nginx start
     rc-service in.tftpd start
 
