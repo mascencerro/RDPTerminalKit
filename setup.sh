@@ -110,7 +110,7 @@ pack_client_fs() {
     tar -vf /srv/www/alpine/client/thinclient.apkovl.tar -C /srv/client_fs/ -r 'etc/apk/repositories'
 
     # Compress APK overlay tarball
-    gzip /srv/www/alpline/client/thinclient.apkovl.tar
+    gzip /srv/www/alpine/client/thinclient.apkovl.tar
 
 }
 
