@@ -102,11 +102,9 @@ pack_client_fs() {
     gunzip /srv/www/alpine/client/thinclient.apkovl.tar.gz
 
     # etc/next_server
-    tar --delete 'etc/next_server' -vf /srv/www/alpine/client/thinclient.apkovl.tar
     tar -vf /srv/www/alpine/client/thinclient.apkovl.tar -C /srv/client_fs/ -r 'etc/next_server'
 
     # etc/apk/repositories
-    tar --delete 'etc/apk/repositories' -fv /srv/www/alpine/client/thinclient.apkovl.tar
     tar -vf /srv/www/alpine/client/thinclient.apkovl.tar -C /srv/client_fs/ -r 'etc/apk/repositories'
 
     # Compress APK overlay tarball
