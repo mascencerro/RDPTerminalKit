@@ -120,9 +120,9 @@ prepare_local_repository() {
     sh /srv/local_repository_fill.sh
 
     # Update client_fs /etc/apk/repositories and list local repository first
-    echo -e "${server_ip}/mod\n$(cat /srv/client_fs/etc/apk/repositories)" > /srv/client_fs/etc/apk/repositories
-    echo -e "${server_ip}/main\n$(cat /srv/client_fs/etc/apk/repositories)" > /srv/client_fs/etc/apk/repositories
-    echo -e "${server_ip}/community\n$(cat /srv/client_fs/etc/apk/repositories)" > /srv/client_fs/etc/apk/repositories
+    echo -e "http://${server_ip}/mod\n$(cat /srv/client_fs/etc/apk/repositories)" > /srv/client_fs/etc/apk/repositories
+    echo -e "http://${server_ip}/main\n$(cat /srv/client_fs/etc/apk/repositories)" > /srv/client_fs/etc/apk/repositories
+    echo -e "http://${server_ip}/community\n$(cat /srv/client_fs/etc/apk/repositories)" > /srv/client_fs/etc/apk/repositories
 
 }
 
