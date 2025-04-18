@@ -91,6 +91,9 @@ set_client_next_server() {
 pack_client_fs() {
     echo "Making some changes to client filesystem and repacking"
 
+    # Need GNU tar for this (busybox tar doesn't provide -r)
+    apk add tar
+
     # Pack up client_fs tree for custom APK overlay build usage
     sh /srv/pack_client_fs.sh
 
